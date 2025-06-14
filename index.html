@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyVirtualBizz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+    <header class="bg-blue-600 text-white py-8">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold">MyVirtualBizz</h1>
+            <p class="mt-2 text-lg">Automatiza y mejora la comunicación de tu negocio con nuestros bots inteligentes.</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto my-12 px-4">
+        <section>
+            <h2 class="text-2xl font-semibold text-center mb-8">Planes disponibles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">InfoBot</h3>
+                    <p class="text-gray-700 mb-4">Responde preguntas frecuentes de manera automática.</p>
+                    <span class="block text-2xl font-bold">$10/mes</span>
+                </div>
+                <div class="bg-white p-6 rounded shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">ReservaBot</h3>
+                    <p class="text-gray-700 mb-4">Gestiona reservas y citas sin intervención humana.</p>
+                    <span class="block text-2xl font-bold">$20/mes</span>
+                </div>
+                <div class="bg-white p-6 rounded shadow-md">
+                    <h3 class="text-xl font-semibold mb-2">VozBot</h3>
+                    <p class="text-gray-700 mb-4">Convierte texto a voz para ofrecer atención telefónica.</p>
+                    <span class="block text-2xl font-bold">$30/mes</span>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <style>
+        #chatbox-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 280px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+        }
+        #chatbox-header {
+            background: #3b82f6;
+            color: white;
+            padding: 0.5rem;
+            border-top-left-radius: 0.5rem;
+            border-top-right-radius: 0.5rem;
+            font-weight: 600;
+        }
+        #chatbox-messages {
+            padding: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+            font-size: 0.875rem;
+        }
+        #chatbox-input {
+            display: flex;
+            border-top: 1px solid #e5e7eb;
+        }
+        #chatbox-input input {
+            flex: 1;
+            border: none;
+            padding: 0.5rem;
+            font-size: 0.875rem;
+        }
+        #chatbox-input button {
+            background: #3b82f6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+        }
+    </style>
+    <div id="chatbox-container">
+        <div id="chatbox-header">Bienvenido</div>
+        <div id="chatbox-messages">
+            <div>Hola, ¿en qué podemos ayudarte?</div>
+        </div>
+        <div id="chatbox-input">
+            <input type="text" id="chatbox-text" placeholder="Escribe tu mensaje..." />
+            <button id="chatbox-send">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const messages = document.getElementById('chatbox-messages');
+            const input = document.getElementById('chatbox-text');
+            const responses = [
+                'Gracias por tu interés.',
+                'Estamos aquí para ayudarte.',
+                'Pronto nos pondremos en contacto contigo.'
+            ];
+            let idx = 0;
+            function addMessage(text, fromUser) {
+                const msg = document.createElement('div');
+                msg.textContent = text;
+                msg.style.margin = '4px 0';
+                if (fromUser) {
+                    msg.style.textAlign = 'right';
+                    msg.style.color = '#1f2937';
+                }
+                messages.appendChild(msg);
+                messages.scrollTop = messages.scrollHeight;
+            }
+            document.getElementById('chatbox-send').addEventListener('click', function () {
+                const text = input.value.trim();
+                if (!text) return;
+                addMessage(text, true);
+                input.value = '';
+                setTimeout(() => {
+                    addMessage(responses[idx % responses.length]);
+                    idx++;
+                }, 800);
+            });
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Enter') {
+                    document.getElementById('chatbox-send').click();
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
