@@ -1,40 +1,75 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MyVirtualBizz</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MyVirtualBizz</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f6f6f6; }
+    header { background: #1976d2; color: #fff; padding: 20px 0; text-align: center; }
+    .plans { display: flex; flex-wrap: wrap; justify-content: space-around; margin: 20px; }
+    .plan { background: #fff; padding: 15px; border-radius: 8px; width: 280px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+    .plan h3 { margin-top: 0; }
+    #chatbox { position: fixed; bottom: 20px; right: 20px; width: 300px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
+    #chatMessages { padding: 10px; flex: 1; overflow-y: auto; font-size: 14px; }
+    #chatInput { display: flex; border-top: 1px solid #ccc; }
+    #chatInput input { flex: 1; padding: 10px; border: none; border-radius: 0 0 0 8px; }
+    #chatInput button { padding: 10px 15px; border: none; background: #1976d2; color: #fff; cursor: pointer; }
+    #chatInput input:focus { outline: none; }
+  </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
-    <header class="bg-blue-600 text-white py-8">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold">MyVirtualBizz</h1>
-            <p class="mt-2 text-lg">Automatiza y mejora la comunicación de tu negocio con nuestros bots inteligentes.</p>
-        </div>
-    </header>
+<body>
+  <header>
+    <h1>MyVirtualBizz</h1>
+  </header>
+  <main>
+    <section class="plans">
+      <div class="plan">
+        <h3>InfoBot</h3>
+        <p>Responde preguntas frecuentes de forma automática.</p>
+        <strong>$10/mes</strong>
+      </div>
+      <div class="plan">
+        <h3>ReservaBot</h3>
+        <p>Gestiona reservas y citas sin intervención humana.</p>
+        <strong>$20/mes</strong>
+      </div>
+      <div class="plan">
+        <h3>VozBot</h3>
+        <p>Convierte texto a voz para atención telefónica.</p>
+        <strong>$30/mes</strong>
+      </div>
+    </section>
+  </main>
 
-    <main class="container mx-auto my-12 px-4">
-        <section>
-            <h2 class="text-2xl font-semibold text-center mb-8">Planes disponibles</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="bg-white p-6 rounded shadow-md">
-                    <h3 class="text-xl font-semibold mb-2">InfoBot</h3>
-                    <p class="text-gray-700 mb-4">Responde preguntas frecuentes de manera automática.</p>
-                    <span class="block text-2xl font-bold">$10/mes</span>
-                </div>
-                <div class="bg-white p-6 rounded shadow-md">
-                    <h3 class="text-xl font-semibold mb-2">ReservaBot</h3>
-                    <p class="text-gray-700 mb-4">Gestiona reservas y citas sin intervención humana.</p>
-                    <span class="block text-2xl font-bold">$20/mes</span>
-                </div>
-                <div class="bg-white p-6 rounded shadow-md">
-                    <h3 class="text-xl font-semibold mb-2">VozBot</h3>
-                    <p class="text-gray-700 mb-4">Convierte texto a voz para ofrecer atención telefónica.</p>
-                    <span class="block text-2xl font-bold">$30/mes</span>
-                </div>
-            </div>
-        </section>
-    </main>
+  <div id="chatbox">
+    <div id="chatMessages"></div>
+    <form id="chatInput">
+      <input type="text" id="message" placeholder="Escribe un mensaje..." autocomplete="off" required>
+      <button type="submit">Enviar</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('chatInput');
+    const messages = document.getElementById('chatMessages');
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = document.getElementById('message');
+      const userText = input.value.trim();
+      if (!userText) return;
+      appendMessage('Tú', userText);
+      input.value = '';
+      setTimeout(() => {
+        appendMessage('Bot', 'Mensaje recibido: ' + userText);
+        messages.scrollTop = messages.scrollHeight;
+      }, 500);
+    });
+    function appendMessage(sender, text) {
+      const div = document.createElement('div');
+      div.textContent = sender + ': ' + text;
+      messages.appendChild(div);
+    }
+  </script>
 </body>
 </html>
