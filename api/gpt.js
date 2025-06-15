@@ -33,15 +33,23 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
+
+    // 🧠 MOSTRAR TODO EL OBJETO devuelto por OpenAI en consola
+    console.log("🔍 Respuesta completa de OpenAI:", data);
+
     const reply = data.choices?.[0]?.message?.content;
 
     if (!reply) {
-      throw new Error("Respuesta no válida de OpenAI");
+      // Si no hay respuesta válida, mostrar el mensaje de error de OpenAI si existe
+      const errorMessage = data.error?.message || "Respuesta no válida de OpenAI";
+      return res.status(500).json({ error: errorMessage });
     }
 
+    // Todo OK
     res.status(200).json(reply);
   } catch (error) {
-    console.error("Error GPT:", error);
-    res.status(500).json({ error: "Error en el servidor" });
+    // Error interno (problemas con fetch, red, etc.)
+    console.error("❌ Error GPT:", error);
+    res.status(500).json({ error: error.message || "Error en el servidor" });
   }
 }
