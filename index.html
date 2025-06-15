@@ -25,11 +25,11 @@
     }
     .plan {
       background: #fff;
-      padding: 15px;
+      padding: 20px;
       border-radius: 8px;
       width: 280px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
+      margin-bottom: 24px;
     }
     .plan h3 {
       margin-top: 0;
@@ -89,29 +89,52 @@
       outline: none;
     }
 
+    #chatToggle {
+      display: none;
+    }
+
     @media (max-width: 600px) {
       body {
-        font-size: 14px;
+        font-size: 15px;
       }
       header {
-        padding: 15px 0;
+        padding: 20px 0;
       }
       .plans {
         flex-direction: column;
-        margin: 10px;
+        margin: 15px;
         align-items: stretch;
       }
       .plan {
         width: 100%;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
       }
       #chatbox {
         bottom: 0;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
+        left: 0;
+        right: 0;
+        transform: none;
         width: 100%;
         border-radius: 8px 8px 0 0;
+        display: none;
+        max-height: 60vh;
+      }
+      #chatbox.open {
+        display: flex;
+      }
+      #chatToggle {
+        display: block;
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 56px;
+        height: 56px;
+        border-radius: 50%;
+        background: #1976d2;
+        color: #fff;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
       }
     }
   </style>
@@ -148,10 +171,19 @@
       <button type="submit">Enviar</button>
     </form>
   </div>
+  <button id="chatToggle">💬</button>
 
   <script>
     const form = document.getElementById('chatInput');
     const messages = document.getElementById('chatMessages');
+    const chatbox = document.getElementById('chatbox');
+    const toggleBtn = document.getElementById('chatToggle');
+
+    if (toggleBtn) {
+      toggleBtn.addEventListener('click', () => {
+        chatbox.classList.toggle('open');
+      });
+    }
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
@@ -161,6 +193,7 @@
 
       appendMessage('Tú', userText);
       input.value = '';
+      chatbox.classList.add('open');
 
       try {
         const res = await fetch('/api/gpt', {
