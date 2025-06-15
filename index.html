@@ -76,7 +76,7 @@
         const data = await res.json();
 
         if (res.ok) {
-          appendMessage('Bot', data);
+          appendMessage('Bot', data.reply);
         } else {
           appendMessage('Bot', `❌ Error: ${data.error || 'Respuesta inválida'}`);
         }
@@ -90,6 +90,7 @@
       const div = document.createElement('div');
       div.textContent = `${sender}: ${text}`;
       messages.appendChild(div);
+      messages.scrollTop = messages.scrollHeight;
     }
   </script>
 </body>
