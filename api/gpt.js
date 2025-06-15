@@ -14,7 +14,8 @@ export default async function handler(req, res) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        Authorization: `Bearer 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`,
+
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
