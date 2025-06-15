@@ -1,7 +1,0 @@
-{
-  "functions": {
-    "api/**/*.js": {
-      "env": ["OPENAI_API_KEY"]
-    }
-  }
-}
