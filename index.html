@@ -43,9 +43,33 @@
       border: 1px solid #ccc;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-      display: flex;
+      z-index: 999;
+      display: none;
       flex-direction: column;
       font-size: 14px;
+    }
+
+    #chatbox.open {
+      display: flex;
+    }
+
+    #chatToggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 56px;
+      height: 56px;
+      border: none;
+      border-radius: 50%;
+      background: #1976d2;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
     }
     #chatMessages {
       padding: 10px;
@@ -148,10 +172,17 @@
       <button type="submit">Enviar</button>
     </form>
   </div>
+  <button id="chatToggle">💬</button>
 
   <script>
     const form = document.getElementById('chatInput');
     const messages = document.getElementById('chatMessages');
+    const chatbox = document.getElementById('chatbox');
+    const toggleButton = document.getElementById('chatToggle');
+
+    toggleButton.addEventListener('click', () => {
+      chatbox.classList.toggle('open');
+    });
 
     form.addEventListener('submit', async function (e) {
       e.preventDefault();
