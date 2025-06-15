@@ -11,7 +11,7 @@
     .plan { background: #fff; padding: 15px; border-radius: 8px; width: 280px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
     .plan h3 { margin-top: 0; }
     #chatbox { position: fixed; bottom: 20px; right: 20px; width: 300px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
-    #chatMessages { padding: 10px; flex: 1; overflow-y: auto; font-size: 14px; max-height: 300px; }
+    #chatMessages { padding: 10px; flex: 1; overflow-y: auto; font-size: 14px; }
     #chatInput { display: flex; border-top: 1px solid #ccc; }
     #chatInput input { flex: 1; padding: 10px; border: none; border-radius: 0 0 0 8px; }
     #chatInput button { padding: 10px 15px; border: none; background: #1976d2; color: #fff; cursor: pointer; }
@@ -55,7 +55,7 @@
     const form = document.getElementById('chatInput');
     const messages = document.getElementById('chatMessages');
 
-    form.addEventListener('submit', async function(e) {
+    form.addEventListener('submit', async function (e) {
       e.preventDefault();
       const input = document.getElementById('message');
       const userText = input.value.trim();
@@ -65,21 +65,25 @@
       input.value = '';
 
       try {
-        const response = await fetch('/api/api-gpt', {
+        const res = await fetch('/api/gpt', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userText })
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ message: userText }),
         });
 
-        const data = await response.json();
+        const data = await res.json();
 
-        appendMessage('Bot', data.reply || `❌ Error: ${data.error || 'Respuesta no válida'}`);
+        if (res.ok) {
+          appendMessage('Bot', data);
+        } else {
+          appendMessage('Bot', `❌ Error: ${data.error || 'Respuesta inválida'}`);
+        }
       } catch (err) {
-        console.error(err);
-        appendMessage('Bot', '❌ Error de red o del servidor.');
+        console.error('❌ Error completo:', err);
+        appendMessage('Bot', '❌ Error de red o del servidor: ' + err.message);
       }
-
-      messages.scrollTop = messages.scrollHeight;
     });
 
     function appendMessage(sender, text) {
