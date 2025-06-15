@@ -10,12 +10,66 @@
     .plans { display: flex; flex-wrap: wrap; justify-content: space-around; margin: 20px; }
     .plan { background: #fff; padding: 15px; border-radius: 8px; width: 280px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
     .plan h3 { margin-top: 0; }
-    #chatbox { position: fixed; bottom: 20px; right: 20px; width: 300px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
-    #chatMessages { padding: 10px; flex: 1; overflow-y: auto; font-size: 14px; }
-    #chatInput { display: flex; border-top: 1px solid #ccc; }
-    #chatInput input { flex: 1; padding: 10px; border: none; border-radius: 0 0 0 8px; }
-    #chatInput button { padding: 10px 15px; border: none; background: #1976d2; color: #fff; cursor: pointer; }
-    #chatInput input:focus { outline: none; }
+    #chatbox {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 400px;
+      height: 500px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    #chatMessages {
+      padding: 15px;
+      flex: 1;
+      overflow-y: auto;
+      font-size: 14px;
+      background: #fafafa;
+      scroll-behavior: smooth;
+    }
+
+    #chatInput {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+      border-top: 1px solid #eee;
+      background: #fff;
+    }
+
+    #chatInput input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      font-size: 14px;
+    }
+
+    #chatInput input:focus {
+      outline: none;
+      border-color: #1976d2;
+    }
+
+    #chatInput button {
+      padding: 8px 16px;
+      border: none;
+      background: #1976d2;
+      color: #fff;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    #chatInput button:hover {
+      background: #135ba1;
+    }
   </style>
 </head>
 <body>
