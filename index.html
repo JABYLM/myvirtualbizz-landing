@@ -1,4 +1,3 @@
-<!-- redeploy por API -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,7 +10,7 @@
     .plans { display: flex; flex-wrap: wrap; justify-content: space-around; margin: 20px; }
     .plan { background: #fff; padding: 15px; border-radius: 8px; width: 280px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
     .plan h3 { margin-top: 0; }
-    #chatbox { position: fixed; bottom: 20px; right: 20px; width: 300px; height: 400px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; flex-direction: column; overflow: hidden; }
+    #chatbox { position: fixed; bottom: 20px; right: 20px; width: 300px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
     #chatMessages { padding: 10px; flex: 1; overflow-y: auto; font-size: 14px; }
     #chatInput { display: flex; border-top: 1px solid #ccc; }
     #chatInput input { flex: 1; padding: 10px; border: none; border-radius: 0 0 0 8px; }
@@ -63,28 +62,25 @@
 
       appendMessage('Tú', userText);
       input.value = '';
-      messages.scrollTop = messages.scrollHeight;
 
       try {
-        const response = await fetch('/api/gpt', {
-          method: 'POST',
+        const res = await fetch("/api/gpt", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ message: userText })
+          body: JSON.stringify({ message: userText }),
         });
 
-        const data = await response.json();
+        const data = await res.json();
 
-        if (data.error) {
-          appendMessage('Bot', 'Hubo un error al responder. Inténtalo más tarde.');
-          console.error('Error del servidor:', data.error);
-        } else {
+        if (res.ok) {
           appendMessage('Bot', data);
+        } else {
+          appendMessage('Bot', '❌ Error: ' + data.error);
         }
       } catch (err) {
-        appendMessage('Bot', 'Error de conexión con el servidor.');
-        console.error('Error de red:', err);
+        appendMessage('Bot', '⚠️ Error inesperado: ' + err.message);
       }
 
       messages.scrollTop = messages.scrollHeight;
@@ -92,7 +88,7 @@
 
     function appendMessage(sender, text) {
       const div = document.createElement('div');
-      div.textContent = `${sender}: ${text}`;
+      div.textContent = sender + ': ' + text;
       messages.appendChild(div);
     }
   </script>
