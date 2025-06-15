@@ -38,55 +38,71 @@
       position: fixed;
       bottom: 20px;
       right: 20px;
-      width: 320px;
+      width: 400px;
+      height: 500px;
       background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      border: 1px solid #1976d2;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       display: flex;
       flex-direction: column;
       font-size: 14px;
+      overflow: hidden;
+      z-index: 1000;
     }
     #chatMessages {
-      padding: 10px;
+      padding: 15px;
       flex: 1;
       display: flex;
       flex-direction: column;
       overflow-y: auto;
-      gap: 6px;
+      gap: 8px;
+      scroll-behavior: smooth;
     }
     #chatMessages .message {
-      padding: 6px 10px;
-      border-radius: 6px;
+      padding: 8px 12px;
+      border-radius: 16px;
       max-width: 80%;
+      line-height: 1.4;
     }
     #chatMessages .user {
-      background: #e3f2fd;
+      background: #1976d2;
+      color: #fff;
       align-self: flex-end;
     }
     #chatMessages .bot {
-      background: #f1f1f1;
+      background: #e0e0e0;
       align-self: flex-start;
     }
     #chatInput {
       display: flex;
+      padding: 10px;
+      background: #fff;
       border-top: 1px solid #ccc;
     }
     #chatInput input {
       flex: 1;
-      padding: 10px;
-      border: none;
-      border-radius: 0 0 0 8px;
-    }
-    #chatInput button {
       padding: 10px 15px;
-      border: none;
-      background: #1976d2;
-      color: #fff;
-      cursor: pointer;
+      border: 1px solid #ccc;
+      border-radius: 20px;
+      margin-right: 10px;
     }
     #chatInput input:focus {
       outline: none;
+      border-color: #1976d2;
+    }
+    #chatInput button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 20px;
+      background: #1976d2;
+      color: #fff;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    #chatInput button:hover {
+      background: #135ba1;
     }
 
     @media (max-width: 600px) {
@@ -107,11 +123,12 @@
       }
       #chatbox {
         bottom: 0;
-        left: 50%;
-        right: auto;
-        transform: translateX(-50%);
+        right: 0;
+        left: 0;
         width: 100%;
-        border-radius: 8px 8px 0 0;
+        height: 100%;
+        border-radius: 0;
+        transform: none;
       }
     }
   </style>
