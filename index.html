@@ -5,17 +5,99 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>MyVirtualBizz</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; background: #f6f6f6; }
-    header { background: #1976d2; color: #fff; padding: 20px 0; text-align: center; }
-    .plans { display: flex; flex-wrap: wrap; justify-content: space-around; margin: 20px; }
-    .plan { background: #fff; padding: 15px; border-radius: 8px; width: 280px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
-    .plan h3 { margin-top: 0; }
-    #chatbox { position: fixed; bottom: 20px; right: 20px; width: 300px; background: #fff; border: 1px solid #ccc; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.3); display: flex; flex-direction: column; }
-    #chatMessages { padding: 10px; flex: 1; overflow-y: auto; font-size: 14px; }
-    #chatInput { display: flex; border-top: 1px solid #ccc; }
-    #chatInput input { flex: 1; padding: 10px; border: none; border-radius: 0 0 0 8px; }
-    #chatInput button { padding: 10px 15px; border: none; background: #1976d2; color: #fff; cursor: pointer; }
-    #chatInput input:focus { outline: none; }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f6f6f6;
+      font-size: 16px;
+    }
+    header {
+      background: #1976d2;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .plans {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px;
+    }
+    .plan {
+      background: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      width: 280px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+    }
+    .plan h3 {
+      margin-top: 0;
+    }
+    #chatbox {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+    }
+    #chatMessages {
+      padding: 10px;
+      flex: 1;
+      overflow-y: auto;
+      font-size: 14px;
+    }
+    #chatInput {
+      display: flex;
+      border-top: 1px solid #ccc;
+    }
+    #chatInput input {
+      flex: 1;
+      padding: 10px;
+      border: none;
+      border-radius: 0 0 0 8px;
+    }
+    #chatInput button {
+      padding: 10px 15px;
+      border: none;
+      background: #1976d2;
+      color: #fff;
+      cursor: pointer;
+    }
+    #chatInput input:focus {
+      outline: none;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+      }
+      header {
+        padding: 15px 0;
+      }
+      .plans {
+        flex-direction: column;
+        margin: 10px;
+        align-items: stretch;
+      }
+      .plan {
+        width: 100%;
+        margin-bottom: 15px;
+      }
+      #chatbox {
+        bottom: 0;
+        left: 50%;
+        right: auto;
+        transform: translateX(-50%);
+        width: 100%;
+        border-radius: 8px 8px 0 0;
+      }
+    }
   </style>
 </head>
 <body>
