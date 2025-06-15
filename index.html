@@ -19,20 +19,39 @@
     }
     .plans {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
-      justify-content: space-around;
-      margin: 20px;
+      gap: 30px;
+      margin: 40px auto;
+      max-width: 1200px;
     }
     .plan {
       background: #fff;
-      padding: 15px;
-      border-radius: 8px;
-      width: 280px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
+      padding: 20px;
+      border-radius: 10px;
+      width: 300px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      border: 1px solid #e0e0e0;
+      text-align: center;
     }
     .plan h3 {
-      margin-top: 0;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+    .plan-icon {
+      font-size: 48px;
+      color: #1976d2;
+      display: block;
+      margin-bottom: 10px;
+    }
+    .plan button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      background: #1976d2;
+      color: #fff;
+      cursor: pointer;
     }
     #chatbox {
       position: fixed;
@@ -98,12 +117,13 @@
       }
       .plans {
         flex-direction: column;
-        margin: 10px;
-        align-items: stretch;
+        align-items: center;
+        margin: 20px 10px;
+        gap: 20px;
       }
       .plan {
         width: 100%;
-        margin-bottom: 15px;
+        max-width: 320px;
       }
       #chatbox {
         bottom: 0;
@@ -124,19 +144,25 @@
   <main>
     <section class="plans">
       <div class="plan">
+        <span class="plan-icon">💬</span>
         <h3>InfoBot</h3>
         <p>Responde preguntas frecuentes de forma automática.</p>
         <strong>$10/mes</strong>
+        <button>Contratar</button>
       </div>
       <div class="plan">
+        <span class="plan-icon">📅</span>
         <h3>ReservaBot</h3>
         <p>Gestiona reservas y citas sin intervención humana.</p>
         <strong>$20/mes</strong>
+        <button>Contratar</button>
       </div>
       <div class="plan">
+        <span class="plan-icon">📞</span>
         <h3>VozBot</h3>
         <p>Convierte texto a voz para atención telefónica.</p>
         <strong>$30/mes</strong>
+        <button>Contratar</button>
       </div>
     </section>
   </main>
